@@ -1,7 +1,5 @@
 package com.src.geeksforgeeks.linkedlist;
 
-import java.util.stream.Stream;
-
 public class LinkedList {
 	private Node header=null;
 	
@@ -16,6 +14,15 @@ public class LinkedList {
 		}
 	}
 	
+	public void display(Node node) {
+		StringBuffer result=new StringBuffer();
+		Node temp=node;
+		while(temp!=null){
+			result.append(temp.getData()+",");
+			temp=temp.getNext();
+		}
+		System.out.println(result.substring(0,result.length()-1));
+	}
 	//Add a node after a given node iterative
 	public void addAfter(int data,int target){
 		Node insertNode=new Node(data);
@@ -40,31 +47,16 @@ public class LinkedList {
 		}
 	}
 	
-	//Add a node after a given node recursive
-	public void addAfterRecursive(int data,int target){
-		if(header==null){
-			header=new Node(data);
-		}else{
-			if(!addafterRecursive(header,target,data,false)){
-				System.out.println("Element "+target+" Not found");
-			}
+	public void reverse() {
+		Node temp = header;
+		Node prev = null;
+		while(temp!=null) {
+			Node curr = temp;
+			temp = temp.getNext();
+			curr.setNext(prev);
+			prev = curr;
 		}
-	}
-	
-	private boolean addafterRecursive(Node currNode,int target,int data,boolean isfound){
-		if(currNode==null){
-			return isfound;
-		}
-		else if(currNode.getData()==target){
-			Node insertNode=new Node(data);
-			if(currNode.getNext()!=null){
-				insertNode.setNext(currNode.getNext());
-			}
-			currNode.setNext(insertNode);
-		}else{
-			addafterRecursive(currNode.getNext(),target,data,false);
-		}
-		return isfound;
+		header = prev;
 	}
 	
 	//Add a node at the end iterative
@@ -80,23 +72,6 @@ public class LinkedList {
 		}
 	}
 	
-	//Add a node at the end recursive
-	public void addEndRecursive(int data){
-		if(header==null){
-			header=new Node(data);
-		}else{
-			addEndRecursive(header,data);
-		}
-	}
-	private void addEndRecursive(Node currNode,int data){
-		if(currNode==null){
-			return;
-		}else if(currNode.getNext()==null){
-			currNode.setNext(new Node(data));
-		}else{
-			addEndRecursive(currNode.getNext(),data);
-		}
-	}
 	
 	//Find previous node of the node to be deleted iterative
 	public void findPreviousDelete(int data){
@@ -124,31 +99,6 @@ public class LinkedList {
 		if(!elementfound){
 			System.out.println("Element not found");
 		}
-	}
-	
-	//Find previous node of the node to be deleted recursive
-	public void findPreviousDeleteRecursive(int data){
-		if(!findPreviousDeleteRecursive(header,null,data,false)){
-			System.out.println("Element not found");
-		}
-	}
-	private boolean findPreviousDeleteRecursive(Node currNode,Node prevNode,int delete,boolean isdeleted){
-		if(currNode!=null){
-			if(currNode.getData()==delete){
-				if(prevNode==null){
-					header=currNode.getNext();
-				}
-				else if(currNode.getNext()!=null){
-					prevNode.setNext(currNode.getNext());
-				}else{
-					prevNode.setNext(null);
-				}
-				return true;
-			}else{
-				findPreviousDeleteRecursive(currNode.getNext(),currNode,delete,false);
-			}
-		}
-		return isdeleted;
 	}
 	
 	//Move last element to first Iterative
@@ -221,20 +171,7 @@ public class LinkedList {
 	}
 	// Swap nodes in a linked list without swapping data
 	public void swapNodes(){
-		Node curr=header,prev=null,next=null;
-		prev=curr;
-		curr=curr.getNext();
-		next=curr.getNext();
-		header=curr;
-		curr.setNext(prev);
-		prev.setNext(next);
-		curr=next;
-		next=curr.getNext();
-		System.out.println(this);
-		prev=curr;
-		curr=curr.getNext();
-		next=curr.getNext();
-		System.out.println(this);
+		
 	}
 	
 	public String toString() {

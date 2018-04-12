@@ -1,21 +1,16 @@
 package com.src.geeksforgeeks.linkedlist;
 
-import java.util.ArrayList;
-import java.util.List;
-
-class A {
-	
-}
-class B extends A {
-	
-}
 class DataStructure {
 	public static void main(String[] args) {
-		List data=new ArrayList<A>();
-		get(data);
+		LinkedList list = new LinkedList();
+		list.addFront(50);
+		list.addFront(45);
+		list.addFront(40);
+		list.addFront(30);
+		list.addFront(20);
+		list.addFront(10);
+		System.out.println(list);
+		list.reverse();
+		System.out.println(list);
 	}
-	public static <T> void get(List<T> i) {
-		i.set(0, i.get(0));
-	}
-	
 }
