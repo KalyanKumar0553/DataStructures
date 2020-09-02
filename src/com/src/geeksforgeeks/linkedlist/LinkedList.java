@@ -1,7 +1,11 @@
 package com.src.geeksforgeeks.linkedlist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LinkedList {
-	private Node header=null;
+	
+	public Node header=null;
 	
 	//Add a node at the front
 	public void addFront(int data){
@@ -23,7 +27,27 @@ public class LinkedList {
 		}
 		System.out.println(result.substring(0,result.length()-1));
 	}
-	//Add a node after a given node iterative
+	
+	public void reverse() {
+		List<Node> result = new ArrayList();
+		reverse(header,result);
+		if(result.size() > 0 ) {
+			header = result.get(0);
+		}
+	}
+	
+
+	private Node reverse(Node currNode,List<Node> result) {
+		if(currNode.getNext() == null) {
+			result.add(currNode);
+			return currNode;
+		}
+		Node data = reverse(currNode.getNext(),result);
+		currNode.setNext(null);
+		data.setNext(currNode);
+		return currNode;
+	}
+	
 	public void addAfter(int data,int target){
 		Node insertNode=new Node(data);
 		if(header==null){
@@ -47,7 +71,7 @@ public class LinkedList {
 		}
 	}
 	
-	public void reverse() {
+	public void reverseIterative() {
 		Node temp = header;
 		Node prev = null;
 		while(temp!=null) {
@@ -173,7 +197,7 @@ public class LinkedList {
 	public void swapNodes(){
 		
 	}
-	
+
 	public String toString() {
 		StringBuffer result=new StringBuffer();
 		Node temp=header;
